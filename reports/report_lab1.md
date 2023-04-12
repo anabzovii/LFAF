@@ -3,9 +3,6 @@
 ## Author: Bzovîi Ana FAF-213
 
 
-
-
-
 ## Theory
     A formal language can be considered to be the media or the format used to convey information from a sender entity to the one that receives it. The usual components of a language are:
 
