@@ -1,20 +1,30 @@
 # Lexer & Scanner
 ## Course: Formal Languages & Finite Automata
-## Author: Spataru Dionisie FAF-211
+## Author: Bzovîi Ana FAF-213
 
 
 
 
 
 ## Theory
-    The term lexer refers to the process of extracting lexical tokens from a string of characters, which is also known as lexical analysis. The lexer is sometimes called a tokenizer or scanner. In the early stages of compiling or interpreting programming, markup or other types of languages, the lexer identifies tokens based on the language's rules, and these tokens are represented as lexemes. A lexeme is a result of splitting a string based on delimiters, such as spaces, while a token provides a name or category for each lexeme, but does not necessarily retain its actual value. Tokens often include additional metadata.
+    A formal language can be considered to be the media or the format used to convey information from a sender entity to the one that receives it. The usual components of a language are:
+
+The alphabet: Set of valid characters;
+The vocabulary: Set of valid words;
+The grammar: Set of rules/constraints over the lang.
+    Now these components can be established in an infinite amount of configurations, which actually means that whenever a language is being created, it's components should be selected in a way to make it as appropriate for it's use case as possible. Of course sometimes it is a matter of preference, that's why we ended up with lots of natural/programming/markup languages which might accomplish the same thing.
 
 ## Objectives:
-- Understand what lexical analysis [1] is.
+- Understand what a language is and what it needs to have in order to be considered a formal one.
+- Create a local && remote repository of a VCS hosting service;
+- Choose a programming language, and my suggestion would be to choose one that supports all the main paradigms;
+- Create a separate folder where you will be keeping the report;
+- Implement a type/class for your grammar;
+- Add one function that would generate 5 valid strings from the language expressed by your given grammar;
+- Implement some functionality that would convert and object of type Grammar to one of type Finite Automaton;
+- For the Finite Automaton, please add a method that checks if an input string can be obtained via the state transition from it;
 
-- Get familiar with the inner workings of a lexer/scanner/tokenizer.
 
-- Implement a sample lexer and show how it works.
   
 
 ## Implementation description
