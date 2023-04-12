@@ -1,0 +1,12 @@
+Variant 8:
+VN={S, D, E, J},
+VT={a, b, c, d, e},
+P={
+    S → aD
+    D → dE
+    D → bJ
+    J → cS
+    E → e
+    E → aE
+    D → aE
+}
