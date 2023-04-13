@@ -173,6 +173,7 @@ q3 --a--> q2
 Start state: q0
 Accept states: {'q2'}
 
+
 Checking if some example strings are accepted by the finite automaton:
 The input string "adee" is accepted by the automaton.
 The input string "ad" is accepted by the automaton.
