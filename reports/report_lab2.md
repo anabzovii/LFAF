@@ -3,13 +3,13 @@
 ## Author: Bzovîi Ana FAF-213
 
 ## Theory
-    A finite automaton is a mechanism used to represent processes of different kinds. It can be compared to a state machine as they both have similar structures and purpose as well. The word finite signifies the fact that an automaton comes with a starting and a set of final states. In other words, for process modeled by an automaton has a beginning and an ending.
+A finite automaton is a mechanism used to represent processes of different kinds. It can be compared to a state machine as they both have similar structures and purpose as well. The word finite signifies the fact that an automaton comes with a starting and a set of final states. In other words, for process modeled by an automaton has a beginning and an ending.
 
-    Based on the structure of an automaton, there are cases in which with one transition multiple states can be reached which causes non determinism to appear. In general, when talking about systems theory the word determinism characterizes how predictable a system is. If there are random variables involved, the system becomes stochastic or non deterministic.
+Based on the structure of an automaton, there are cases in which with one transition multiple states can be reached which causes non determinism to appear. In general, when talking about systems theory the word determinism characterizes how predictable a system is. If there are random variables involved, the system becomes stochastic or non deterministic.
 
-    That being said, the automata can be classified as non-/deterministic, and there is in fact a possibility to reach determinism by following algorithms which modify the structure of the automaton.
+That being said, the automata can be classified as non-/deterministic, and there is in fact a possibility to reach determinism by following algorithms which modify the structure of the automaton.
     
-    The Chomsky Hierarchy is a system for classifying formal languages and grammars into four types - Type-0 to Type-3. Type-0 grammars are the most powerful, capable of generating all possible formal languages, while Type-3 grammars are the simplest and generate regular languages. The hierarchy is used to analyze the computational complexity and expressive power of different types of languages and grammars, and is commonly used in computer science and linguistics.
+The Chomsky Hierarchy is a system for classifying formal languages and grammars into four types - Type-0 to Type-3. Type-0 grammars are the most powerful, capable of generating all possible formal languages, while Type-3 grammars are the simplest and generate regular languages. The hierarchy is used to analyze the computational complexity and expressive power of different types of languages and grammars, and is commonly used in computer science and linguistics.
 
 ## Objectives:
 - Understand what an automaton is and what it can be used for.
