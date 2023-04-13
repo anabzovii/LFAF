@@ -1,4 +1,4 @@
-# Determinism in Finite Automata. Conversion from NDFA 2 DFA. Chomsky Hierarchy.
+# Determinism in Finite Automata. Conversion from NDFA 2 DFA. Chomsky Hierarchy
 ## Course: Formal Languages & Finite Automata
 ## Author: Bzovîi Ana FAF-213
 
@@ -142,7 +142,17 @@ The 'is_deterministic' method checks if a finite automaton is deterministic. It 
                 queue.extend(next_states)
         return True
 ```
+**Result:**
+```
+The FA is non-deterministic
+```
+
 ### NDFA to DFA
+The code defines a function convert_to_dfa that takes an NDFA and converts it into a Deterministic Finite Automaton (DFA). The function uses the powerset construction algorithm to compute the set of states and the transition function of the DFA.
+
+The function initializes empty sets and queues to store the computed properties of the DFA. It then processes each state of the DFA by checking for its accept state status and computing the transitions for each symbol in the alphabet. Finally, it returns a new DFA object with the computed properties.
+
+The powerset construction algorithm is a technique used to convert a non-deterministic finite automaton (NFA) to a deterministic finite automaton (DFA). The basic idea is to represent the states of the DFA as sets of states of the NFA, where each set represents a possible state of the DFA. The algorithm works by starting with the set containing the start state of the NFA, and computing the set of states that can be reached by consuming each symbol in the input alphabet. This process is repeated for each set of states until all possible states of the DFA have been computed. At the end, the resulting DFA has one state for each subset of states of the NFA, and transitions between those states are defined by the transitions of the NFA. The accept states of the DFA are those sets of states that contain at least one accept state of the NFA.
 
 ```python
     def convert_to_dfa(self):
@@ -192,27 +202,34 @@ The 'is_deterministic' method checks if a finite automaton is deterministic. It 
                               accept_states=dfa_accept_states)
         return dfa
 ```
+**Result:**
+```
+______DFA______
+Finite Automaton:
+States: {frozenset({'q0'}), frozenset({'q', '1'})}
+Alphabet: {'a', 'b'}
+Transitions:
+frozenset({'q0'}) --a--> frozenset({'q', '1'})
+Start state: frozenset({'q0'})
+Accept states: set()
 
-
-### Main
-The Main class imports the Lexer class from the lexer module, and then creates an instance of the Lexer class by invoking its constructor without any arguments. Subsequently, the tokenize method of the Lexer instance is invoked with the input string "3 + 4 * 2 - 1". The method tokenizes the input string by separating it into a list of tokens and then returns the list. Finally, the resulting list of tokens is printed to the console using the print function. The output confirms that the input string has been correctly tokenized into its component tokens, including numbers, operators, and parentheses. Moreover, the message "input valid" is printed to the console, indicating that the input string was tokenized successfully without encountering any errors.```python
-```python
- # Define input text
-        text = "3 + 4 * 2 - 1"
-
-
-        # Create lexer object
-        lexer = Lexer(text)
-
-        token = lexer.get_next_token()
-
-        while token.type != "EOF":
-            print(token)
-            token = lexer.get_next_token()
-
-        print(token)
-
+***************************
+Generated Finite Automaton:
+Finite Automaton:
+States: {'q2', 'q0', 'q1', 'q3', 'q4'}
+Alphabet: {'a', 'b'}
+Transitions:
+q0 --a--> q1
+q1 --b--> q1
+q2 --b--> q0
+q3 --a--> q4
+q4 --a--> q0
+q2 --a--> q3
+Start state: q0
+Accept states: {'q3'}
 ```
 
 ## Conclusions
-A lexer is a crucial component of programming language processing. It breaks down an input string into tokens that represent meaningful language elements. These tokens are mapped to corresponding types and semantics defined by production rules. The lexer is used for syntax highlighting, code completion, and program analysis. This project implements a lexer in Python using regular expressions to match token types. The implementation involves iterating over the input string, matching against regular expressions, and generating corresponding tokens. Regular expressions provide an efficient way to define the language's syntax. The project demonstrates the importance of lexers in language processing and shows how they can be used to build sophisticated compilers and analysis tools.
+In this laboratory work I have included the basic concepts of finite automata, determinism, and the Chomsky Hierarchy, and have listed my objectives for the project, which include implementing a function to classify grammars based on the Chomsky Hierarchy and performing various operations on finite automata, such as conversion from NDFA to DFA and graphical representation.
+
+An important part of the report is the implementation, which explains how I have implemented the classify function using conditional statements to check whether a given grammar belongs to Type-0 to Type-3 in the Chomsky Hierarchy. Additionally, I have provided code for converting a finite automaton to a regular grammar using a set of rules and have included code for checking whether the automaton is deterministic or non-deterministic and for converting an NDFA to a DFA. I have also mentioned that you have implemented functionality for graphical representation of the automaton, which uses external libraries, tools, or APIs.
