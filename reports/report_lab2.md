@@ -1,4 +1,4 @@
-# Determinism in Finite Automata. Conversion from NDFA 2 DFA. Chomsky Hierarchy
+# Determinism in Finite Automata. Conversion from NDFA to DFA. Chomsky Hierarchy
 ## Course: Formal Languages & Finite Automata
 ## Author: Bzovîi Ana FAF-213
 
