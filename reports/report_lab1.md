@@ -152,16 +152,17 @@ if __name__ == '__main__':
 ```
 
 ## Results
+```
 Generating 5 valid strings from the language expressed by the grammar:
-abcaaae
-aaaaaae
-abcaae
+ade
+aae
 aaaaae
-abcade
+abcabcaae
+aaae
 Generated Finite Automaton:
 Finite Automaton:
-States: {'q1', 'q0', 'q2'}
-Alphabet: {'a', 'e', 'd', 'c', 'b'}
+States: {'q0', 'q1', 'q2'}
+Alphabet: {'a', 'e', 'c', 'b', 'd'}
 Transitions:
 q0 --a--> q1
 q1 --d--> q2
@@ -173,13 +174,13 @@ q3 --a--> q2
 Start state: q0
 Accept states: {'q2'}
 
-
 Checking if some example strings are accepted by the finite automaton:
 The input string "adee" is accepted by the automaton.
 The input string "ad" is accepted by the automaton.
 The input string "adea" is accepted by the automaton.
 The input string "acbd" is not accepted by the automaton.
 The input string "adde" is not accepted by the automaton.
+```
 
 
 ## Conclusions
