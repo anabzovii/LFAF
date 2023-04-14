@@ -34,7 +34,6 @@ class Main:
             else:
                 print(f'The input string "{input_string}" is not accepted by the automaton.')
 
-
 if __name__ == '__main__':
     main = Main()
     main.run()
