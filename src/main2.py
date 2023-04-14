@@ -48,19 +48,8 @@ class Main:
         print(dfa)
         print("***************************")
         fa.render()
-
-
-
-
         print('Generated Finite Automaton:')
         print(fa)
-        # print('Checking if some example strings are accepted by the finite automaton:')
-        # input_strings = ['aab', 'abbab', 'abaab', 'ab', 'abb']
-        # for input_string in input_strings:
-        #     if fa.accepts(input_string):
-        #         print(f'The input string "{input_string}" is accepted by the automaton.')
-        #     else:
-        #         print(f'The input string "{input_string}" is not accepted by the automaton.')
 
 
 if __name__ == '__main__':

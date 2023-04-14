@@ -137,8 +137,6 @@ class FiniteAutomaton:
         plt.show()
 
 
-
-
     def __str__(self):
         s = "Finite Automaton:\n"
         s += "States: " + str(self.states) + "\n"
