@@ -1,8 +1,5 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import networkx as nx
-from collections import defaultdict
-
 class FiniteAutomaton:
     def __init__(self, states, alphabet, transitions, start_state, accept_states):
         self.states = states

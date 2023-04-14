@@ -1,5 +1,3 @@
-from grammar import Grammar
-from finite_automaton import FiniteAutomaton
 from Lexer import Lexer, Token
 
 def main():

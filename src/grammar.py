@@ -2,14 +2,15 @@ import random
 
 class Grammar:
     def __init__(self):
-        self.VN = {'S', 'A', 'C', 'D'}
-        self.VT = {'a', 'b'}
+        self.VN = {'S', 'D', 'E', 'J'}
+        self.VT = {'a', 'b', 'c', 'd', 'e'}
         self.P = {
-            'S': ['aA'],
-            'A': ['bS', 'dD'],
-            'D': ['bC', 'aD'],
-            'C': ['a', 'bA']
+            'S': ['aD'],
+            'D': ['dE', 'bJ', 'aE'],
+            'J': ['cS'],
+            'E': ['e', 'aE']
         }
+
 
     def classify(self):
         # Check if the grammar is type-0
@@ -35,6 +36,7 @@ class Grammar:
         # If none of the above conditions hold, then the grammar is not a valid Chomsky type
         return "Not a valid Chomsky type"
 
+
     def generate_string(self, start_symbol, max_length):
         if max_length == 0:
             return ''
@@ -52,3 +54,4 @@ class Grammar:
         for i in range(count):
             strings.append(self.generate_string('S', max_length))
         return strings
+
