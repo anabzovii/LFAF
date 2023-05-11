@@ -219,10 +219,7 @@ The `chomsky_normal_form` method converts the remaining production rules to the 
 
 # Results:
 ```
-/Users/den4k_red/Desktop/UTM/LFAF/source/main.py 
-Original grammar:
-({"S'", 'A', 'S', 'B', 'C'}, {'d', 'a'}, [('S', ('d', 'B')), ('S', ('A',)), ('A', ('d',)), ('A', ('d', 'S')), ('A', ('a', 'B', 'd', 'A', 'B')), ('B', ('a',)), ('B', ('d', 'A')), ('B', ('A',)), ('B', ()), ('C', ('A', 'a'))], 'S')
-Grammar in Chomsky normal form:
+Chomsky normal form:
 (set(), {'d', 'a'}, [('S', ('S',)), ('S', ('d',)), ('S', ('d',)), ('S', ('a',)), ('S', ('d',)), ('S', ('d',)), ('S', ('d', 'S')), ('S', ('d',)), ('S', ('S',)), ('S', ('a', 'd')), ('S', ('a',)), ('S', ('d',))], "S'")
 
 ```
