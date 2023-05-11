@@ -2,8 +2,8 @@ from grammar import Grammar
 from ChomskyConv import Converter_CNF
 from finite_automaton import FiniteAutomaton
 from Lexer import Lexer, Token
-import unittest
-from UnitTester import UnitTester
+
+
 
 
 def main():
@@ -30,10 +30,7 @@ def main():
     cnf_converter = Converter_CNF(grammar)
     cnf_grammar = cnf_converter.convert_to_cnf()
 
-    # Print the resulting 
-    print('Grammar:')
-    print(grammar)
-    print('Grammar in Chomsky Normal Form:')
+    print('Chomsky Normal Form:')
     print(cnf_grammar)
 
 

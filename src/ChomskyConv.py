@@ -6,7 +6,7 @@ class Converter_CNF:
         else:
             self.grammar = grammar + (None,)
 
-    def eliminate_epsilon(self):
+    def delete_epsilon(self):
         vn, vi, p, s = self.grammar
 
         # Find nullable symbols
@@ -38,7 +38,7 @@ class Converter_CNF:
         else:
             self.grammar = vn, vi, new_p
 
-    def eliminate_renaming(self):
+    def delete_renaming(self):
         vn, vi, p, s = self.grammar
 
         # Eliminate renaming
@@ -75,7 +75,7 @@ class Converter_CNF:
         else:
             self.grammar = new_vn, vi, new_p
 
-    def eliminate_nonproductive(self):
+    def delete_nonproductive(self):
         vn, vi, p, s = self.grammar
 
         #Eliminate non-productive symbols
@@ -122,13 +122,13 @@ class Converter_CNF:
             s_prime = s
 
         # Eliminate epsilon productions
-        self.eliminate_epsilon()
+        self.delete_epsilon()
 
         # Eliminate renaming
-        self.eliminate_renaming()
+        self.delete_renaming()
 
         # Eliminate inaccessible symbols
-        self.eliminate_nonproductive()
+        self.delete_nonproductive()
 
         new_vn = set()
         new_p = []
