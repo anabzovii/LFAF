@@ -1,56 +1,56 @@
 # Chomsky Normal Form
 ## Course: Formal Languages & Finite Automata
-## Author: Spataru Dionisie FAF-211
+## Author: Bzovii Ana FAF-213
 
 
-
-### Variant 24
+### Variant 8
 
 G=(VN, VT, P, S) Vn={S, A, B, C} VT={a, d}
 P={1. S⇒dB
 2. S→A
 3. A→d
 4. A→dS
-5. A⇒aBdAB
+5. A→aAdAB
 6. B→a
-7. B→dA
+7. B→aS
 8. B⇒A
 9. B→ε
 10. C→Aa}
 ## Theory
 
-Chomsky Normal Form (CNF) is a simplified form of context-free grammars that is useful in both the study and the development of algorithms for parsing and other language-processing tasks. A context-free grammar is said to be in Chomsky Normal Form if all its production rules are in one of the following two forms:
+An algorithm for parsing and other language-processing tasks can be developed using the Chomsky Normal Form (CNF), a condensed version of context-free grammars. If all of a context-free grammar's production rules take one of the two following forms, it is considered to be in Chomsky Normal Form.
 
-1. A -> BC, where A, B, and C are non-terminal symbols.
-2. A -> a, where A is a non-terminal symbol, and a is a terminal symbol. 
+1. The non-terminal symbols A, B, and C in the chain A->BC.
+2. Where A is a non-terminal symbol and an is a terminal symbol, the relationship is A->a. 
 
-The main advantage of CNF is its simplicity, which makes it easier to develop algorithms that work with context-free grammars. Any context-free grammar can be converted into an equivalent grammar in Chomsky Normal Form. The conversion process involves the following steps:
+Its simplicity, which makes it simpler to create algorithms that work with context-free grammars, is CNF's main advantage. Any context-free grammar can be transformed into its Chomsky Normal Form equivalent. The following steps are involved in the conversion process:
 
-1. Eliminate ε-productions: Replace any production rule of the form A -> ε with alternative productions that generate the same language without the ε-production.
-2. Eliminate renaming (unit productions): Remove production rules of the form A -> B, where A and B are non-terminal symbols, and substitute the production rules for B in place of A.
-3. Eliminate inaccessible symbols: Remove any non-terminal symbols that cannot be reached from the start symbol in the grammar.
-4. Eliminate non-productive symbols: Remove any non-terminal symbols that cannot derive any terminal strings.
-5. Convert remaining rules to CNF: Break down production rules with more than two symbols on the right-hand side into multiple rules that conform to the CNF format.
+Eliminate -productions by substituting alternative productions that provide the same language without the -production for every production rule of the pattern A ->.
+2. Get rid of renaming (unit productions): Substitute production rules for B in favor of production rules for A, where A and B are non-terminal symbols.
+3. Remove symbols that are inaccessible: In the grammar, remove any non-terminal symbols that are inaccessible from the start symbol.
+4. Remove useless symbols: Get rid of any symbols that aren't terminal and can't be used to create terminal strings.
+5. Convert the remaining rules to CNF format: Divide any production rules that have more than two symbols into separate rules that follow the CNF structure.
 
-By following these steps, we can transform any context-free grammar into an equivalent grammar in Chomsky Normal Form without altering the language it generates.
+These procedures allow us to convert any context-free grammar into its equivalent in Chomsky Normal Form without changing the language that grammar produces.
 
 ## Objectives
 
-1. Implement a method for normalizing an input grammar by the rules of CNF (Chomsky Normal Form).
-2. Encapsulate the implementation in a method with an appropriate signature (also ideally in an appropriate class/type).
-3. Execute and test the implemented functionality.
-4. (Bonus) Create unit tests that validate the functionality of the project.
-5. (Bonus) Make the function accept any grammar, not only the one from the student's variant.
+1. Introduce a procedure for normalizing an input grammar in accordance with the CNF (Chomsky Normal Form) criteria.
+2. Include the implementation in a method with the right signature (preferably in a class or type as well).
+3. Put the implemented feature into use and test it.
+4. (Bonus) Produce unit tests that confirm the project's functionality.
+5. (Bonus) Change the function so that it will accept any grammar, not only the student's variety.
 
 ## Implementation description
 
 ### Eliminate Epsilon Productions
 
-The `eliminate_epsilon` method is responsible for removing ε-productions (rules of the form A -> ε) from the grammar. It identifies all non-terminal symbols that generate ε directly or indirectly and substitutes them in all other production rules, effectively removing the need for ε-productions.
+The grammar's 'delete_epsilon' method is in charge of eliminating -productions (rules of the type A -> ). In essence, it eliminates the requirement for -productions by identifying all non-terminal symbols that produce either directly or indirectly and substituting those symbols in all other production rules.
+
 ```python
-        def eliminate_epsilon(self):
+        def delete_epsilon(self):
         vn, vi, p, s = self.grammar
-        # Step 1: Find nullable symbols
+        # Find nullable symbols
         nullable = set()
         while True:
             updated = False
@@ -61,7 +61,7 @@ The `eliminate_epsilon` method is responsible for removing ε-productions (rules
                         updated = True
             if not updated:
                 break
-        # Step 2: Eliminate epsilon productions
+        # Eliminate epsilon productions
         new_p = []
         for rule in p:
             lhs, rhs = rule
@@ -80,12 +80,13 @@ The `eliminate_epsilon` method is responsible for removing ε-productions (rules
 
 
 ### Eliminate Renaming
-The `eliminate_renaming` method removes unit productions (rules of the form A -> B, where A and B are non-terminal symbols) from the grammar. It does so by replacing the unit production with all the production rules of the referenced non-terminal symbol. This process is repeated until all unit productions are eliminated.
+Unit productions (rules with the form A -> B, where A and B are non-terminal symbols) are eliminated from the grammar using the 'delete_renaming' function. It accomplishes this by substituting all of the production regulations for the referenced non-terminal symbol for the unit production. Until all unit productions are stopped, this process is repeated.
+
 
 ```python
-        def eliminate_renaming(self):
+        def delete_renaming(self):
         vn, vi, p, s = self.grammar
-        # Step 3: Eliminate renaming
+        # Eliminate renaming
         new_p = []
         for rule in p:
             if len(rule[1]) == 1 and rule[1][0] in vn:
@@ -101,7 +102,7 @@ The `eliminate_renaming` method removes unit productions (rules of the form A ->
 The `eliminateInaccessibleSymbols` part of the `eliminate_renaming` removes non-terminal symbols that are not reachable from the start symbol of the grammar. It starts with the start symbol and iteratively finds all non-terminal symbols reachable from it. Then, it removes any production rules containing non-reachable symbols.
 
 ```python
-  # Step 4: Eliminate inaccessible symbols
+  # Eliminate inaccessible symbols
    reachable = set([s])
         updated = True
         while updated:
@@ -126,12 +127,12 @@ The `eliminateInaccessibleSymbols` part of the `eliminate_renaming` removes non-
 
 ### Eliminate Non-Productive Symbols
 
-The `eliminate_nonproductive` method removes non-terminal symbols that cannot derive any terminal strings. It first identifies all non-productive symbols and then removes any production rules containing them. This step ensures that every non-terminal symbol in the grammar can derive at least one terminal string.
+The non-terminal symbols that cannot be used to create any terminal strings are removed by the 'delete_nonproductive' technique. It then eliminates any production rules including those symbols after first identifying any non-productive symbols. This phase makes sure that the grammar can deduce at least one terminal string from each non-terminal symbol.
 
 ```python
-       def eliminate_nonproductive(self):
+       def delete_nonproductive(self):
         vn, vi, p, s = self.grammar
-        # Step 5: Eliminate non-productive symbols
+        # Eliminate non-productive symbols
         productive = set([s])
         updated = True
         while updated:
@@ -157,12 +158,12 @@ The `eliminate_nonproductive` method removes non-terminal symbols that cannot de
 ```
 
 ### Convert to Chomsky Normal Form
-The `chomsky_normal_form` method converts the remaining production rules to the CNF format. It does so by breaking down rules with more than two symbols on the right-hand side into multiple rules that conform to CNF. Additionally, it introduces new non-terminal symbols for terminal symbols within rules containing more than one symbol on the right-hand side.
+The remaining production rules are converted to the CNF format using the 'chomsky_normal_form' function. It accomplishes this by segmenting rules with more than two symbols on the right side into several rules that follow CNF. In rules with more than one symbol on the right side, it also introduces new non-terminal symbols to replace terminal symbols.
 
 ```python
         def chomsky_normal_form(self):
         vn, vi, p, s = self.grammar
-        # Step 0: Add a new start symbol if necessary
+        # Add a new start symbol if necessary
         if s in vn:
             s_prime = s + "'"
             while s_prime in vn:
@@ -174,13 +175,13 @@ The `chomsky_normal_form` method converts the remaining production rules to the 
             self.grammar = vn, vi, new_p, 'S'
         else:
             s_prime = s
-        # Step 1: Eliminate epsilon productions
+        # Eliminate epsilon productions
         self.eliminate_epsilon()
-        # Step 2: Eliminate renaming
+        # Eliminate renaming
         self.eliminate_renaming()
-        # Step 3: Eliminate inaccessible symbols
+        # Eliminate inaccessible symbols
         self.eliminate_nonproductive()
-        # Step 6: Convert remaining productions to Chomsky normal form
+        # Convert remaining productions to Chomsky normal form
         new_vn = set()
         new_p = []
         mapping = {}
@@ -216,7 +217,6 @@ The `chomsky_normal_form` method converts the remaining production rules to the 
         return vn, vi, p, s
 ```
 
-
 # Results:
 ```
 Chomsky normal form:
@@ -225,10 +225,11 @@ Chomsky normal form:
 ```
 
 # Conclusions
-This project has successfully implemented a method to normalize a grammar to Chomsky Normal Form, covering every step of the conversion process. This includes eliminating ε-productions, unit productions, inaccessible symbols, and non-productive symbols, and finally converting the remaining production rules to CNF. The code is modular, making it easier to maintain, test, and modify. The Chomsky Normal Form is a useful tool for studying formal languages and automata, as it simplifies grammar structures, making them more manageable for parsing and language processing algorithms. Through this project, we have gained a more profound comprehension of context-free grammars, their properties, and the conversion process to CNF. This knowledge will prove valuable in future studies and projects related to formal languages and automata theory.
+This project successfully applied a technique to convert a grammar to Chomsky Normal Form, taking into account each stage of the conversion procedure. By doing away with -productions, unit productions, inaccessible symbols, and non-productive symbols, the remaining production rules can then be converted to CNF. Modularity in the code makes it simpler to maintain, test, and modify. Because it simplifies grammar structures and makes them more manageable for parsing and language processing algorithms, the Chomsky Normal Form is a useful tool for researching formal languages and automata. We now have a deeper understanding of context-free grammars, their characteristics, and the CNF conversion procedure thanks to this study. Future formal language and automata theory research and projects will find great use for this information.
 
-In addition to the benefits mentioned, converting a grammar to Chomsky Normal Form also has computational advantages. For instance, parsing a grammar in CNF can be done in polynomial time, which means that the time it takes to parse a sentence grows at most as a polynomial function of the sentence length. This is in contrast to more complex grammars that may require exponential time to parse, making them impractical for use in large-scale language processing applications.
+Chomsky Normal Form conversion has computational advantages in addition to the previously discussed advantages. For instance, parsing a grammar in CNF can be done in polynomial time, meaning that the time needed to parse a sentence only increases polynomially as the length of the sentence increases. Contrastingly, more complicated grammars could take exponentially longer to parse, making them unsuitable for use in extensive language processing applications.
 
-Furthermore, CNF is not the only way to normalize a grammar. Other normal forms, such as Greibach Normal Form and the Extended Backus-Naur Form (EBNF), can also simplify grammars in different ways. The choice of normal form depends on the specific needs of the language processing task at hand.
+Furthermore, normalizing a grammar is not possible solely through CNF. Grammars can also be made simpler in various ways by other normal forms, such as Greibach Normal Form and the Extended Backus-Naur Form (EBNF). The normal form used will rely on the particular requirements of the language processing activity at hand.
 
-Overall, the study of formal languages and automata theory is a fascinating and ever-evolving field, with many practical applications in areas such as natural language processing, compiler design, and artificial intelligence. As we continue to develop new algorithms and techniques for processing language, a deep understanding of the underlying grammar structures and normalization processes will remain crucial.
+Overall, the study of formal languages and automata theory is a fascinating and dynamic discipline with several real-world applications in fields like artificial intelligence, compiler design, and natural language processing. A thorough understanding of the underlying grammatical structures and normalization procedures will remain essential as we continue to create new language processing algorithms and methods.
+
