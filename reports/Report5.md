@@ -1,9 +1,9 @@
 # Parser & Building an Abstract Syntax Tree
 ## Course: Formal Languages & Finite Automata
-## Author: Corețchi Mihai FAF-211
+## Author: Bzovii Ana FAF-213
 
 ## Theory
-A parser is a compiler component that deconstructs data into smaller parts from the lexical analysis stage. It processes a sequence of tokens and generates a parse tree. An Abstract Syntax Tree is a tree-like representation of the abstract syntax of source code. Each tree node represents a source code construct. Abstract Syntax Trees are crucial in compilers, serving as data structures to depict program structure. Typically, an Abstract Syntax Tree is the outcome of a compiler's syntax analysis phase. It often acts as an intermediate program representation across several compiler stages, significantly influencing the compiler's final output.
+A parser is a part of a compiler that breaks down data into smaller pieces after doing lexical analysis. It creates a parse tree after processing a string of tokens. The abstract syntax of source code is shown in a tree-like representation known as an Abstract Syntax Tree. A source code concept is represented by each tree node. Abstract Syntax Trees are essential to compilers because they act as data structures to represent the structure of programs. Usually, a compiler's syntax analysis phase produces an Abstract Syntax Tree. It frequently serves as an interim program representation during various compiler stages, having a substantial impact on the compiler's output.
 ## Objectives:
 - Get familiar with parsing, what it is and how it can be programmed.
 
@@ -18,108 +18,70 @@ A parser is a compiler component that deconstructs data into smaller parts from 
 
 ## Implementation description
 ### parse
-This method evaluates an arithmetic expression and returns the result as a float. It first calls the expression() method to calculate the result. Then, it checks if the next token is an assignment operator ('='). If it is, it moves to the next token and checks if it's the end of the input. If it is, it returns the result. If these conditions are not met, it throws an exception indicating an incomplete expression.
+The outcome of this procedure, which evaluates an arithmetic expression, is returned as a float. To calculate the outcome, it first calls the expression() method. It then determines whether the following token is an assignment operator ('='). If so, it advances to the subsequent token and determines if the input has ended. It returns the outcome if it is. It raises an exception that indicates an incomplete expression if these requirements are not met.
 ```java
-public Float parse() {
-Float result = expression();
-
-        if (position < tokens.size() && tokens.get(position).getType() == TokenType.ASSIGNMENT) {
-            position++;
-            if (position < tokens.size() && tokens.get(position).getType() == TokenType.END_OF_INPUT) {
-                return result;
-            }
-        }
-
-        throw new IllegalArgumentException("Incomplete expression");
-    }
+    def parse_function(self):
+        result = self.expr_function()
+        if self.pos < len(self.tokens):
+            raise Exception(f"Invalid syntax: {self.tokens[self.pos][0]}")
+        return result
 ```
 
 ### expression
-This method evaluates an arithmetic expression that involves addition and subtraction operations. It starts by calling the term() method to get the initial value. Then, it enters a loop where it checks each token in the expression. If the token is a plus sign, it increments the position, adds the next term to the value, and continues the loop. If the token is a minus sign, it increments the position, subtracts the next term from the value, and continues the loop. If the token is neither a plus nor a minus sign, or if there are no more tokens, it returns the current value.
+Using addition and subtraction operations, this approach evaluates an arithmetic statement. To obtain the initial value, the term() method is first used. It then enters a loop where each token in the expression is checked. If the token is a plus sign, the position is increased, the value is increased, and the loop is continued. If the token is a minus sign, the position is increased, the value is reduced by the subsequent term, and the loop is then continued. It returns the current value if the token is neither a plus nor a negative sign, or if there are no more tokens.
 ```java
-private float expression() {
-float value = term();
-
-        while (true) {
-            if (position >= tokens.size()) {
-                return value;
-            }
-
-            Token token = tokens.get(position);
-
-            switch (token.getType()) {
-                case PLUS:
-                    position++;
-                    value += term();
-                    break;
-                case MINUS:
-                    position++;
-                    value -= term();
-                    break;
-                default:
-                    return value;
-            }
-        }
-    }
+    def expr_function(self):
+        result = self.term_function()
+        while self.pos < len(self.tokens) and self.tokens[self.pos][1] in ("Addition", "Subtraction"):
+            if self.tokens[self.pos][1] == "Addition":
+                self.pos += 1
+                result += self.term_function()
+            else:
+                self.pos += 1
+                result -= self.term_function()
+        return result
 ```
 ### term
-This method evaluates a part of the arithmetic expression that involves multiplication and division operations. It starts by calling the factor() method to get the initial value. Then, it enters a loop where it checks each token in the expression. If the token is a multiplication sign, it increments the position, multiplies the current value by the next factor, and continues the loop. If the token is a division sign, it increments the position, divides the current value by the next factor, and continues the loop. If the token is neither a multiplication nor a division sign, or if there are no more tokens, it returns the current value.
+With this approach, a portion of the mathematical phrase that calls for multiplication and division operations is evaluated. To obtain the initial value, the factor() method is first called. It then enters a loop where each token in the expression is checked. If the token is a multiplication symbol, the position is increased, the current value is multiplied by the subsequent factor, and the loop is then continued. If the token is a division symbol, the position is increased, the current value is divided by the subsequent factor, and the loop is then continued. It yields the current value if the token is neither a multiplication nor a division sign, or if there are no more tokens.
 ```java
-private float term() {
-float value = factor();
-
-        while (true) {
-            if (position >= tokens.size()) {
-                return value;
-            }
-
-            Token token = tokens.get(position);
-
-            switch (token.getType()) {
-                case MULTIPLY:
-                    position++;
-                    value *= factor();
-                    break;
-                case DIVIDE:
-                    position++;
-                    value /= factor();
-                    break;
-                default:
-                    return value;
-            }
-        }
-    }
+    def term_function(self):
+        result = self.factor_function()
+        while self.pos < len(self.tokens) and self.tokens[self.pos][1] in ("Multiply", "Divide"):
+            if self.tokens[self.pos][1] == "Multiply":
+                self.pos += 1
+                result *= self.factor_function()
+            else:
+                self.pos += 1
+                result /= self.factor_function()
+        return result
 ```
 ### factor
-This method processes individual numbers in the expression. If there are no more tokens, it throws an error. If the current token is a number, it converts it to a float and returns it. If the token isn't a number, it throws an error.
+The expression is processed using this method's individual numbers. It throws an error if there are no more tokens. The current token is converted to a float and returned if it is a number. It throws an error if the token is not a number.
 ```java
-private float factor() {
-if (position >= tokens.size()) {
-throw new IllegalArgumentException("Unexpected end of input");
-}
-
-        Token token = tokens.get(position++);
-
-        if (token.getType() == TokenType.NUMBER) {
-            return Float.parseFloat(token.getLexeme());
-        }
-
-        throw new IllegalArgumentException("Unexpected token: " + token);
-    }
+    def factor_function(self):
+        if self.tokens[self.pos][1] == "Digit":
+            result = float(self.tokens[self.pos][0])
+            self.pos += 1
+            return result
+        elif self.tokens[self.pos][1] == "LeftP":
+            self.pos += 1
+            result = self.expr_function()
+            if self.tokens[self.pos][1] != "RightP":
+                raise Exception(f"Missing closing parenthesis")
+            self.pos += 1
+            return result
+        else:
+            raise Exception(f"Invalid syntax: {self.tokens[self.pos][0]}")
 ```
 
 ## Results
 
 ---------------------------------
-Lab 5
 
-`2+3*4-6/5=12.8`
-
-`1*2+3=5.0`
-
-`1+2+3+4+5/1/2/3/4/5-1-2-3-4-5*1*2*3*4*5=-599.9583`
+`THe parser is  40.0
+THe token is :  [('5', 'Digit'), ('*', 'Multiply'), ('2', 'Digit'), ('*', 'Multiply'), ('(', 'LeftP'), ('10', 'Digit'), ('-', 'Subtraction'), ('2', 'Digit'), (')', 'RightP'), ('/', 'Divide'), ('2', 'Digit')]`
 
 ---------------------------------
 
 ## Conclusions
-In conclusion, this laboratory work has been an enriching experience. I've had the opportunity to delve into the intricacies of creating a parser in Java, which is a crucial component in the process of compiling and interpreting code. I've learned how to break down complex expressions into manageable tokens, and how to evaluate these tokens according to the rules of arithmetic. I've also gained a deeper understanding of how to handle different types of data, such as integers and floating-point numbers, and how to manage unexpected input. This work has certainly deepened my appreciation for the complexity and elegance of compiler design. I'm looking forward to applying these concepts in future projects.
+To sum up, working at the lab has been a rewarding experience. I've got the chance to delve into the complexities of building a parser in Java, which is an essential step in the compilation and interpretation of code. I've learned how to simplify complicated equations into smaller, more manageable units and how to evaluate these units in accordance with arithmetic laws. Additionally, I now have a better understanding of how to deal with various data kinds, such integers and floating-point numbers, as well as how to handle unexpected input. My appreciation for the intricacy and elegance of compiler design has definitely grown as a result of this work. I'm excited to use these ideas in my future projects.
